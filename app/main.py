@@ -1,9 +1,6 @@
 from fastapi import FastAPI
-import logging
-import os
+from app.routes.routes import router
 
 app = FastAPI()
 
-@app.get("/")
-async def root():
-    return {"message": os.getenv("DB_URI")}
+app.include_router(router)

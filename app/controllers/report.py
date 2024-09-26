@@ -4,7 +4,7 @@ from app.schemas import ReportCreate
 from datetime import datetime
 
 def create_report(session:Session, report:ReportCreate):
-    db_report = Report(**report.model_dump(), created_at=datetime.utcnow())
+    db_report = Report(**report.dict(), created_at=datetime.utcnow(), completed_at=datetime.utcnow())
     session.add(db_report)
     session.commit()
     session.refresh(db_report)
@@ -19,3 +19,7 @@ def update_report(session:Session, report_id:str, status:str):
         session.commit()
         session.refresh(report)
     return report
+
+def get_report(db: Session, report_id: str):
+    resp = db.query(Report).filter(Report.id == report_id).first()
+    return resp
