@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, String, DateTime
 
 
 engine = create_engine(
-    "postgresql+psycopg2://root:password@localhost/loop",
+    url="postgresql+psycopg2://root:password@db/loop",
     pool_size=20,
     max_overflow=0
 )
